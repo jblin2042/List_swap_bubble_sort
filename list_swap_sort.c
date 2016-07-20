@@ -212,7 +212,7 @@ int Bubble_sort_swap ( List**head , int (*Swap_method) ( List** , List* , List* 
 }
 
 // 驗證 tools below //
-#define D_array_max ( 1000 )
+#define D_array_max ( 100 )
 int Append_list ( List**head , int val [ D_array_max ] ) {
 	* head = ( List* ) calloc ( 1 , sizeof(List) ) ;
 	if ( NULL == * head ) {
@@ -258,7 +258,22 @@ void Make_rand ( int val [ D_array_max ] ) {
 	}
 	return ;
 }
+// 建立亂數資料 //
+void Make_rand_1 ( int val [ D_array_max ] ) {
+	srand ( time ( NULL ) ) ;
+	int i = 0 ,a = 0 ,b = 0 ,val_tmp = 0 ;
+	for ( ; i < D_array_max ; ++ i )
+		val [ i ] = i ;
 
+	for ( i = 0 ; i < D_array_max ; ++ i ) {
+		a = rand ( ) % D_array_max ;
+		val_tmp = val [ a ] ;
+		val [ a ] = val [ b ] ;
+		val [ b ] = val_tmp ;
+	}
+
+	return ;
+}
 void Compare_list ( List* head ) {
 	char buf [ 8912 ] = { 0 } ;
 	int sz = 0 ,rtn = 0 ,i = 0 ;
@@ -329,7 +344,6 @@ int main ( void ) {
 
 	int val [ D_array_max ] = { 0 } ;
 	Make_rand ( val ) ;
-
 	List * head = NULL ;
 
 	// Bubble_sort_array //
